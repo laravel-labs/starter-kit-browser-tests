@@ -1,0 +1,28 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "laravel/starter-kit-browser-tests",
+    "description": "Browser Tests for Laravel Starter Kit",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["dev"],
+    "autoload": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.3",
+        "pestphp/pest": "^4.0"
+    },
+    "require-dev": {
+        "laravel/vue-starter-kit": "^1.0.2",
+        "orchestra/testbench-core": "^10.6.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
