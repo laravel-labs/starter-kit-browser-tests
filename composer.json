@@ -23,6 +23,17 @@
             "pestphp/pest-plugin": true
         }
     },
+    "scripts": {
+        "vue:build": [
+            "@putenv APP_BASE_PATH=./vendor/laravel/vue-starter-kit",
+            "npm --prefix=./vendor/laravel/vue-starter-kit ci",
+            "npm --prefix=./vendor/laravel/vue-starter-kit run build"
+        ],
+        "vue:test": [
+            "@putenv APP_BASE_PATH=./vendor/laravel/vue-starter-kit",
+            "php vendor/bin/pest"
+        ]
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
