@@ -2,6 +2,12 @@
 /composer.lock
 /vendor/*
 
+# NPM
+/node_modules/*
+
+# Pest
+/tests/Browser/Screenshots/*
+
 # PHPUnit
 /coverage/*
 /.phpunit.cache/*

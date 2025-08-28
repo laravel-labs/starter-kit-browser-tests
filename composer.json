@@ -12,10 +12,11 @@
     },
     "require": {
         "php": "^8.3",
-        "pestphp/pest": "^4.0"
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-browser": "^4.0"
     },
     "require-dev": {
-        "laravel/vue-starter-kit": "^1.0.2",
+        "laravel/vue-starter-kit": "dev-main",
         "orchestra/testbench-core": "^10.6.3"
     },
     "config": {
@@ -26,8 +27,9 @@
     "scripts": {
         "vue:build": [
             "@putenv APP_BASE_PATH=./vendor/laravel/vue-starter-kit",
-            "npm --prefix=./vendor/laravel/vue-starter-kit ci",
-            "npm --prefix=./vendor/laravel/vue-starter-kit run build"
+            "cd \"./vendor/laravel/vue-starter-kit\" && composer install",
+            "cd \"./vendor/laravel/vue-starter-kit\" && npm ci",
+            "cd \"./vendor/laravel/vue-starter-kit\" && npm run build"
         ],
         "vue:test": [
             "@putenv APP_BASE_PATH=./vendor/laravel/vue-starter-kit",
