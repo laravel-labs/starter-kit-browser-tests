@@ -47,3 +47,5 @@ jobs:
 
       - name: Execute tests
         run: composer run vue:ci
+        env:
+          APP_BASE_PATH: ./vendor/laravel/vue-starter-kit
