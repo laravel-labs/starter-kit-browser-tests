@@ -10,7 +10,7 @@ test('welcome screen can be rendered', function () {
 });
 
 test('guests can browse to register page from welcome page', function () {
-    visit('/')
+    visit(route('home'))
         ->click('Register')
         ->assertUrlIs(route('register'))
         ->assertNoConsoleLogs()
@@ -20,7 +20,7 @@ test('guests can browse to register page from welcome page', function () {
 });
 
 test('guests can browse to login page from welcome page', function () {
-    visit('/')
+    visit(route('home'))
         ->click('Log in')
         ->assertUrlIs(route('login'))
         ->assertNoConsoleLogs()
