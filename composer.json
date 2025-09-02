@@ -38,6 +38,10 @@
         "vue:test": [
             "APP_BASE_PATH=./vendor/laravel/vue-starter-kit php vendor/bin/pest"
         ],
+        "vue:serve": [
+            "@vue:build",
+            "cd \"./vendor/laravel/vue-starter-kit\" && php artisan serve"
+        ],
         "vue:ci": [
             "@vue:build",
             "@vue:test"
