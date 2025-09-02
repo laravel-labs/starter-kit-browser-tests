@@ -16,7 +16,7 @@
         "pestphp/pest-plugin-browser": "^4.0"
     },
     "require-dev": {
-        "laravel/vue-starter-kit": "dev-main",
+        "laravel/vue-starter-kit": "dev-pest-ci",
         "orchestra/testbench-core": "^10.6.4",
         "orchestra/testbench": "^10.6"
     },
@@ -27,12 +27,13 @@
     },
     "scripts": {
         "vue:build": [
+            "cd \"./vendor/laravel/vue-starter-kit\" && npm ci",
+            "cd \"./vendor/laravel/vue-starter-kit\" && npm run build",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer remove --dev \"laravel/sail\" --no-update",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer install",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer run post-root-package-install",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer run post-create-project-cmd",
-            "cd \"./vendor/laravel/vue-starter-kit\" && npm ci",
-            "cd \"./vendor/laravel/vue-starter-kit\" && npm run build"
+            "cd \"./vendor/laravel/vue-starter-kit\" && php artisan optimize:clear"
         ],
         "vue:test": [
             "APP_BASE_PATH=./vendor/laravel/vue-starter-kit php vendor/bin/pest"
