@@ -4,6 +4,8 @@ use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
 
+use function Pest\Laravel\post;
+
 test('reset password link screen can be rendered', function () {
     visit(route('password.request'))
         ->assertSee('Forgot password')
@@ -12,59 +14,58 @@ test('reset password link screen can be rendered', function () {
         ->assertNoJavaScriptErrors();
 });
 
-test('test_reset_password_link_can_be_requested', function () {
-    Notification::fake();
-
+test('test reset password link can be requested', function () {
     $user = User::factory()->create();
+
+    Notification::fake();
 
     visit(route('password.request'))
         ->fill('email', $user->email)
         ->press('Email password reset link')
-        ->assertSee('A reset link will be sent if the account exists.');
+        ->assertSee('A reset link will be sent if the account exists.')
+        ->assertNoConsoleLogs()
+        ->assertNoJavaScriptErrors();
 
     Notification::assertSentTo($user, ResetPassword::class);
 });
 
-    // public function test_reset_password_screen_can_be_rendered()
-    // {
-    //     Notification::fake();
+test('reset password screen can be rendered', function () {
+    $user = User::factory()->create();
 
-    //     $user = User::factory()->create();
+    Notification::fake();
 
-    //     $this->post(route('password.email'), ['email' => $user->email]);
+    post(route('password.email'), ['email' => $user->email]);
 
-    //     Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
-    //         $response = $this->get(route('password.request', $notification->token));
+    Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
+        visit(route('password.reset', $notification->token))
+            ->assertNoConsoleLogs()
+            ->assertNoJavaScriptErrors();
 
-    //         $response->assertStatus(200);
+        return true;
+    });
+});
 
-    //         return true;
-    //     });
-    // }
+test('password can be reset with valid token', function () {
+    $user = User::factory()->create();
 
-    // public function test_password_can_be_reset_with_valid_token()
-    // {
-    //     Notification::fake();
+    Notification::fake();
 
-    //     $user = User::factory()->create();
+    post(route('password.email'), ['email' => $user->email]);
 
-    //     $this->post(route('password.email'), ['email' => $user->email]);
+    Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
+        visit(route('password.reset', $notification->token))
+            ->fill('password', 'password')
+            ->fill('password_confirmation', 'password')
+            ->assertNoConsoleLogs()
+            ->assertNoJavaScriptErrors()
+            ->press('Reset password')
+            ->assertUrlIs(route('home'))
+            ->assertNoConsoleLogs()
+            ->assertNoJavaScriptErrors();
 
-    //     Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
-    //         $response = $this->post(route('password.store'), [
-    //             'token' => $notification->token,
-    //             'email' => $user->email,
-    //             'password' => 'password',
-    //             'password_confirmation' => 'password',
-    //         ]);
-
-    //         $response
-    //             ->assertSessionHasNoErrors()
-    //             ->assertRedirect(route('login'));
-
-    //         return true;
-    //     });
-    // }
+        return true;
+    });
+});
 
     // public function test_password_cannot_be_reset_with_invalid_token(): void
     // {
