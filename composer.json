@@ -27,7 +27,6 @@
     },
     "scripts": {
         "vue:build": [
-            "@putenv APP_BASE_PATH=./vendor/laravel/vue-starter-kit",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer remove --dev \"laravel/sail\" --no-update",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer install",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer run post-root-package-install",
@@ -36,8 +35,7 @@
             "cd \"./vendor/laravel/vue-starter-kit\" && npm run build"
         ],
         "vue:test": [
-            "@putenv APP_BASE_PATH=./vendor/laravel/vue-starter-kit",
-            "php vendor/bin/pest"
+            "APP_BASE_PATH=./vendor/laravel/vue-starter-kit php vendor/bin/pest"
         ],
         "vue:ci": [
             "@vue:build",
