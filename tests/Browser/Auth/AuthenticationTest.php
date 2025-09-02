@@ -3,6 +3,10 @@
 use App\Models\User;
 use Illuminate\Support\Facades\RateLimiter;
 
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertAuthenticated;
+use function Pest\Laravel\assertGuest;
+
 test('login screen can be rendered', function () {
     visit(route('login'))
         ->assertNoConsoleLogs()
@@ -22,7 +26,7 @@ test('users_can_authenticate_using_the_login_screen', function () {
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
 
-    $this->assertAuthenticated();
+    assertAuthenticated();
 });
 
 test('users can not authenticate with invalid password', function () {
@@ -37,13 +41,13 @@ test('users can not authenticate with invalid password', function () {
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
 
-    $this->assertGuest();
+    assertGuest();
 });
 
 test('users can logout', function () {
     $user = User::factory()->create();
 
-    $this->actingAs($user);
+    actingAs($user);
 
     visit(route('dashboard'))
         ->click($user->name)
@@ -52,7 +56,7 @@ test('users can logout', function () {
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
 
-    $this->assertGuest();
+    assertGuest();
 });
 
 test('users are rate limited', function () {

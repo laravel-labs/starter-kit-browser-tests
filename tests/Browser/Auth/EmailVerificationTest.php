@@ -40,7 +40,7 @@ test('email can be verified', function () {
         ->assertNoJavaScriptErrors();
 
     Event::assertDispatched(Verified::class);
-    $this->assertTrue($user->fresh()->hasVerifiedEmail());
+    expect($user->fresh()->hasVerifiedEmail())->toBeTrue();
 });
 
 test('email is not verified with invalid hash', function () {
@@ -63,7 +63,7 @@ test('email is not verified with invalid hash', function () {
         ->assertNoJavaScriptErrors();
 
     Event::assertNotDispatched(Verified::class);
-    $this->assertFalse($user->fresh()->hasVerifiedEmail());
+    expect($user->fresh()->hasVerifiedEmail())->toBeFalse();
 });
 
 test('email is not verified with invalid user id', function () {
@@ -86,7 +86,7 @@ test('email is not verified with invalid user id', function () {
         ->assertNoJavaScriptErrors();
 
     Event::assertNotDispatched(Verified::class);
-    $this->assertFalse($user->fresh()->hasVerifiedEmail());
+    expect($user->fresh()->hasVerifiedEmail())->toBeFalse();
 });
 
 test('verified user is redirected to dashboard from verification prompt', function () {
@@ -128,5 +128,5 @@ test('already_verified_user_visiting_verification_link_is_redirected_without_fir
         ->assertNoJavaScriptErrors();
 
     Event::assertNotDispatched(Verified::class);
-    $this->assertTrue($user->fresh()->hasVerifiedEmail());
+    expect($user->fresh()->hasVerifiedEmail())->toBeTrue();
 });

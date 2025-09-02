@@ -2,6 +2,8 @@
 
 use App\Models\User;
 
+use function Pest\Laravel\actingAs;
+
 test('guests are redirected to the login page', function () {
     visit(route('dashboard'))
         ->assertUrlIs(route('login'))
@@ -12,7 +14,7 @@ test('guests are redirected to the login page', function () {
 });
 
 test('authenticated users can visit the dashboard', function () {
-    $this->actingAs(User::factory()->create());
+    actingAs(User::factory()->create());
 
     visit(route('dashboard'))
         ->assertUrlIs(route('dashboard'))

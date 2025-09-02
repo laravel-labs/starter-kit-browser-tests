@@ -2,6 +2,9 @@
 
 use App\Models\User;
 
+use function Pest\Laravel\assertAuthenticated;
+use function Pest\Laravel\assertGuest;
+
 test('registration screen can be rendered', function () {
     visit(route('register'))
         ->assertSee('Create an account')
@@ -21,7 +24,7 @@ test('new user can be registered', function () {
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
 
-    $this->assertAuthenticated();
+    assertAuthenticated();
 });
 
 test('new user cannot be registered when email has already been taken', function () {
@@ -40,7 +43,7 @@ test('new user cannot be registered when email has already been taken', function
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
 
-    $this->assertGuest();
+    assertGuest();
 });
 
 test('new user cannot be registered when password does not match', function () {
@@ -54,5 +57,5 @@ test('new user cannot be registered when password does not match', function () {
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
 
-    $this->assertGuest();
+    assertGuest();
 });
