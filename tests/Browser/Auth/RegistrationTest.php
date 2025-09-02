@@ -2,7 +2,7 @@
 
 use App\Models\User;
 
-test('it can show the register page', function () {
+test('registration screen can be rendered', function () {
     visit('/register')
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors()
@@ -10,7 +10,7 @@ test('it can show the register page', function () {
         ->assertSee('Enter your details below to create your account');
 });
 
-test('it can register a new user', function () {
+test('new user can be registered', function () {
     visit('/register')
         ->fill('name', 'Taylor Otwell')
         ->fill('email', 'taylor@laravel.com')
@@ -22,7 +22,7 @@ test('it can register a new user', function () {
     $this->assertAuthenticated();
 });
 
-test('it cannot register a new user when email has already been taken', function () {
+test('new user cannot be registered when email has already been taken', function () {
     User::factory()->create([
         'name' => 'Taylor',
         'email' => 'taylor@laravel.com',
@@ -39,7 +39,7 @@ test('it cannot register a new user when email has already been taken', function
     $this->assertGuest();
 });
 
-test('it cannot register a new user when password does not match', function () {
+test('new user cannot be registered when password does not match', function () {
     visit('/register')
         ->fill('name', 'Taylor Otwell')
         ->fill('email', 'taylor@laravel.com')

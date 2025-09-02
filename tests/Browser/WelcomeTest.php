@@ -1,6 +1,6 @@
 <?php
 
-test('it can show the default welcome page', function () {
+test('welcome screen can be rendered', function () {
     visit('/')
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors()
@@ -9,7 +9,7 @@ test('it can show the default welcome page', function () {
         ->assertSee('Register');
 });
 
-test('it can browse to the register page', function () {
+test('guests can browse to register page from welcome page', function () {
     visit('/')
         ->click('Register')
         ->assertPathEndsWith('/register')
@@ -19,7 +19,7 @@ test('it can browse to the register page', function () {
         ->assertSee('Enter your details below to create your account');
 });
 
-test('it can browse to the login page', function () {
+test('guests can browse to login page from welcome page', function () {
     visit('/')
         ->click('Log in')
         ->assertPathEndsWith('/login')
