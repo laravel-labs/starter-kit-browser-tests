@@ -46,7 +46,11 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Build vue-starter-kit
-        run: APP_BASE_PATH=${{ github.workspace }}/vendor/laravel/vue-starter-kit composer run vue:build
+        run: composer run vue:build
+        env:
+          APP_BASE_PATH: ${{ github.workspace }}/vendor/laravel/vue-starter-kit
 
       - name: Execute tests
-        run: APP_BASE_PATH=${{ github.workspace }}/vendor/laravel/vue-starter-kit php vendor/bin/pest
+        run: php vendor/bin/pest
+        env:
+          APP_BASE_PATH: ${{ github.workspace }}/vendor/laravel/vue-starter-kit
