@@ -3,8 +3,8 @@
 use App\Models\User;
 
 test('guests are redirected to the login page', function () {
-    visit('/dashboard')
-        ->assertPathEndsWith('/login')
+    visit(route('dashboard'))
+        ->assertUrlIs(route('login'))
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors()
         ->assertSee('Log in to your account')
@@ -14,8 +14,8 @@ test('guests are redirected to the login page', function () {
 test('authenticated users can visit the dashboard', function () {
     $this->actingAs(User::factory()->create());
 
-    visit('/dashboard')
-        ->assertPathEndsWith('/dashboard')
+    visit(route('dashboard'))
+        ->assertUrlIs(route('dashboard'))
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
 });

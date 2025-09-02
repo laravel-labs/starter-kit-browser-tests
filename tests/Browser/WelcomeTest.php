@@ -12,7 +12,7 @@ test('welcome screen can be rendered', function () {
 test('guests can browse to register page from welcome page', function () {
     visit('/')
         ->click('Register')
-        ->assertPathEndsWith('/register')
+        ->assertUrlIs(route('register'))
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors()
         ->assertSee('Create an account')
@@ -22,7 +22,7 @@ test('guests can browse to register page from welcome page', function () {
 test('guests can browse to login page from welcome page', function () {
     visit('/')
         ->click('Log in')
-        ->assertPathEndsWith('/login')
+        ->assertUrlIs(route('login'))
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors()
         ->assertSee('Log in to your account')

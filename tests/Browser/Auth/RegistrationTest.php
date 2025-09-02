@@ -3,7 +3,7 @@
 use App\Models\User;
 
 test('registration screen can be rendered', function () {
-    visit('/register')
+    visit(route('register'))
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors()
         ->assertSee('Create an account')
@@ -11,7 +11,7 @@ test('registration screen can be rendered', function () {
 });
 
 test('new user can be registered', function () {
-    visit('/register')
+    visit(route('register'))
         ->fill('name', 'Taylor Otwell')
         ->fill('email', 'taylor@laravel.com')
         ->fill('password', 'password')
@@ -28,7 +28,7 @@ test('new user cannot be registered when email has already been taken', function
         'email' => 'taylor@laravel.com',
     ]);
 
-    visit('/register')
+    visit(route('register'))
         ->fill('name', 'Taylor Otwell')
         ->fill('email', 'taylor@laravel.com')
         ->fill('password', 'password')
@@ -40,7 +40,7 @@ test('new user cannot be registered when email has already been taken', function
 });
 
 test('new user cannot be registered when password does not match', function () {
-    visit('/register')
+    visit(route('register'))
         ->fill('name', 'Taylor Otwell')
         ->fill('email', 'taylor@laravel.com')
         ->fill('password', 'password')
