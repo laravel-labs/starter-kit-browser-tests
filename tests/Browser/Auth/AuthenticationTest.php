@@ -18,7 +18,9 @@ test('users_can_authenticate_using_the_login_screen', function () {
         ->fill('email', $user->email)
         ->fill('password', 'password')
         ->press('Log in')
-        ->assertUrlIs(route('dashboard'));
+        ->assertUrlIs(route('dashboard'))
+        ->assertNoConsoleLogs()
+        ->assertNoJavaScriptErrors();
 
     $this->assertAuthenticated();
 });
@@ -31,7 +33,9 @@ test('users can not authenticate with invalid password', function () {
         ->fill('password', 'wrong-password')
         ->press('Log in')
         ->assertUrlIs(route('login'))
-        ->assertSee('These credentials do not match our records.');
+        ->assertSee('These credentials do not match our records.')
+        ->assertNoConsoleLogs()
+        ->assertNoJavaScriptErrors();
 
     $this->assertGuest();
 });
@@ -44,7 +48,9 @@ test('users can logout', function () {
     visit(route('dashboard'))
         ->click($user->name)
         ->click('Log out')
-        ->assertUrlIs(route('home'));
+        ->assertUrlIs(route('home'))
+        ->assertNoConsoleLogs()
+        ->assertNoJavaScriptErrors();
 
     $this->assertGuest();
 });
@@ -59,6 +65,8 @@ test('users are rate limited', function () {
         ->fill('password', 'wrong-password')
         ->press('Log in')
         ->assertUrlIs(route('login'))
-        ->assertSee('Too many login attempts. Please try again in');
+        ->assertSee('Too many login attempts. Please try again in')
+        ->assertNoConsoleLogs()
+        ->assertNoJavaScriptErrors();
 });
 
