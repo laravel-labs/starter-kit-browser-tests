@@ -106,7 +106,7 @@ test('verified user is redirected to dashboard from verification prompt', functi
     Event::assertNotDispatched(Verified::class);
 });
 
-test('already_verified_user_visiting_verification_link_is_redirected_without_firing_event_again', function () {
+test('already verified user visiting verification link is redirected without firing event again', function () {
     $user = User::factory()->create([
         'email_verified_at' => now(),
     ]);

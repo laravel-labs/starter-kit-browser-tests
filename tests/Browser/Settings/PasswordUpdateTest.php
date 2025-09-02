@@ -23,7 +23,7 @@ test('password can be updated', function () {
         ->fill('password', 'new-password')
         ->fill('password_confirmation', 'new-password')
         ->press('Save password')
-        ->assertSee('Saved')
+        ->assertSee('Saved.')
         ->assertUrlIs(route('password.edit'))
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
