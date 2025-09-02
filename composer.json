@@ -17,7 +17,7 @@
     },
     "require-dev": {
         "laravel/vue-starter-kit": "dev-main",
-        "orchestra/testbench-core": "dev-10/merge-config as 10.7.0",
+        "orchestra/testbench-core": "^10.6.4",
         "orchestra/testbench": "^10.6"
     },
     "config": {
@@ -38,6 +38,10 @@
         "vue:test": [
             "@putenv APP_BASE_PATH=./vendor/laravel/vue-starter-kit",
             "php vendor/bin/pest"
+        ],
+        "vue:ci": [
+            "@vue:build",
+            "@vue:test"
         ]
     },
     "minimum-stability": "dev",
