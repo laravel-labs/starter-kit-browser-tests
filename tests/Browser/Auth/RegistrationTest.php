@@ -4,10 +4,10 @@ use App\Models\User;
 
 test('registration screen can be rendered', function () {
     visit(route('register'))
-        ->assertNoConsoleLogs()
-        ->assertNoJavaScriptErrors()
         ->assertSee('Create an account')
-        ->assertSee('Enter your details below to create your account');
+        ->assertSee('Enter your details below to create your account')
+        ->assertNoConsoleLogs()
+        ->assertNoJavaScriptErrors();
 });
 
 test('new user can be registered', function () {
