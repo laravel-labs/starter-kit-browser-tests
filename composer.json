@@ -17,7 +17,8 @@
     },
     "require-dev": {
         "laravel/vue-starter-kit": "dev-main",
-        "orchestra/testbench-core": "^10.6.3"
+        "orchestra/testbench-core": "dev-10/merge-config as 10.7.0",
+        "orchestra/testbench": "^10.6"
     },
     "config": {
         "allow-plugins": {
@@ -27,7 +28,10 @@
     "scripts": {
         "vue:build": [
             "@putenv APP_BASE_PATH=./vendor/laravel/vue-starter-kit",
+            "cd \"./vendor/laravel/vue-starter-kit\" && composer remove --dev \"laravel/sail\"",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer install",
+            "cd \"./vendor/laravel/vue-starter-kit\" && composer run post-root-package-install",
+            "cd \"./vendor/laravel/vue-starter-kit\" && composer run post-create-project-cmd",
             "cd \"./vendor/laravel/vue-starter-kit\" && npm ci",
             "cd \"./vendor/laravel/vue-starter-kit\" && npm run build"
         ],
