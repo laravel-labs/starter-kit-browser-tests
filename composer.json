@@ -27,12 +27,12 @@
     },
     "scripts": {
         "vue:build": [
-            "cd \"./vendor/laravel/vue-starter-kit\" && npm ci",
-            "cd \"./vendor/laravel/vue-starter-kit\" && npm run build",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer remove --dev \"laravel/sail\" --no-update",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer install",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer run post-root-package-install",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer run post-create-project-cmd",
+            "cd \"./vendor/laravel/vue-starter-kit\" && npm ci",
+            "cd \"./vendor/laravel/vue-starter-kit\" && npm run build",
             "cd \"./vendor/laravel/vue-starter-kit\" && php artisan optimize:clear"
         ],
         "vue:test": [
