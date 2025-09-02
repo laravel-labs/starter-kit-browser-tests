@@ -45,7 +45,12 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Execute tests
-        run: composer run vue:ci
+      - name: Build vue-starter-kit
+        run: composer run vue:build
         env:
-          APP_BASE_PATH: ./vendor/laravel/vue-starter-kit
+          APP_BASE_PATH: ${GITHUB_WORKSPACE}/vendor/laravel/vue-starter-kit
+
+      - name: Execute tests
+        run: php vendor/bin/pest
+        env:
+          APP_BASE_PATH: ${GITHUB_WORKSPACE}/vendor/laravel/vue-starter-kit
