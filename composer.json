@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/starter-kit-browser-tests",
+    "name": "laravel-labs/starter-kit-browser-tests",
     "description": "Browser Tests for Laravel Starter Kit",
     "type": "library",
     "license": "MIT",
