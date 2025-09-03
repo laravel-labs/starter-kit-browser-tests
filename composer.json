@@ -18,6 +18,7 @@
         "pestphp/pest-plugin-laravel": "^4.0"
     },
     "require-dev": {
+        "laravel/livewire-starter-kit": "dev-pest-ci",
         "laravel/vue-starter-kit": "dev-pest-ci",
         "orchestra/testbench-core": "^10.6.4",
         "orchestra/testbench": "^10.6"
@@ -32,9 +33,30 @@
             "@prepare"
         ],
         "build": [
+            "@livewire:build",
             "@vue:build"
         ],
+        "test": [
+            "@livewire:test",
+            "@vue:test"
+        ],
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "livewire:build": [
+            "cd \"./vendor/laravel/livewire-starter-kit\" && composer remove --dev \"laravel/sail\" --no-update",
+            "cd \"./vendor/laravel/livewire-starter-kit\" && composer install",
+            "cd \"./vendor/laravel/livewire-starter-kit\" && composer run post-root-package-install",
+            "cd \"./vendor/laravel/livewire-starter-kit\" && composer run post-create-project-cmd",
+            "cd \"./vendor/laravel/livewire-starter-kit\" && npm ci",
+            "cd \"./vendor/laravel/livewire-starter-kit\" && npm run build",
+            "cd \"./vendor/laravel/livewire-starter-kit\" && php artisan optimize:clear"
+        ],
+        "livewire:test": [
+            "APP_BASE_PATH=./vendor/laravel/livewire-starter-kit php vendor/bin/pest"
+        ],
+        "livewire:serve": [
+            "@vue:build",
+            "cd \"./vendor/laravel/livewire-starter-kit\" && php artisan serve"
+        ],
         "vue:build": [
             "cd \"./vendor/laravel/vue-starter-kit\" && composer remove --dev \"laravel/sail\" --no-update",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer install",
@@ -50,10 +72,6 @@
         "vue:serve": [
             "@vue:build",
             "cd \"./vendor/laravel/vue-starter-kit\" && php artisan serve"
-        ],
-        "vue:ci": [
-            "@vue:build",
-            "@vue:test"
         ]
     },
     "minimum-stability": "dev",

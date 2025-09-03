@@ -15,7 +15,7 @@ test('login screen can be rendered', function () {
         ->assertNoJavaScriptErrors();
 });
 
-test('users_can_authenticate_using_the_login_screen', function () {
+test('users can authenticate using the login screen', function () {
     $user = User::factory()->create();
 
     visit(route('login'))
