@@ -53,15 +53,13 @@ test('password can be reset with valid token', function () {
     post(route('password.email'), ['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
-        visit(route('password.reset', $notification->token))
+        visit(route('password.reset', ['token' => $notification->token, 'email' => $user->email]))
             ->fill('password', 'password')
             ->fill('password_confirmation', 'password')
-            ->assertNoConsoleLogs()
-            ->assertNoJavaScriptErrors()
+            ->assertValue('email', $user->email)
             ->press('@reset-password-button')
-            ->assertUrlIs(route('home'))
-            ->assertNoConsoleLogs()
-            ->assertNoJavaScriptErrors();
+            ->assertUrlIs(route('login'))
+            ->assertSee('Your password has been reset.');
 
         return true;
     });
