@@ -26,7 +26,7 @@ test('profile information can be updated', function () {
         ->assertSee('Update your name and email address')
         ->fill('name', 'Test User')
         ->fill('email', 'test@example.com')
-        ->press('Save')
+        ->press('@update-profile-button')
         ->assertSee('Saved.')
         ->assertUrlIs(route('profile.edit'))
         ->assertNoConsoleLogs()
@@ -47,7 +47,7 @@ test('email verification status is unchanged when the email address is unchanged
         ->assertSee('Update your name and email address')
         ->fill('name', 'Test User')
         ->fill('email', $user->email)
-        ->press('Save')
+        ->press('@update-profile-button')
         ->assertSee('Saved.')
         ->assertUrlIs(route('profile.edit'))
         ->assertNoConsoleLogs()
@@ -60,10 +60,10 @@ test('user can delete their account', function () {
     actingAs($user = User::factory()->create());
 
     visit(route('profile.edit'))
-        ->press('@delete-user')
+        ->press('@delete-user-button')
         ->assertSee('Are you sure you want to delete your account?')
         ->fill('password', 'password')
-        ->press('@confirm-delete-user')
+        ->press('@confirm-delete-user-button')
         ->assertUrlIs(route('home'))
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
@@ -76,10 +76,10 @@ test('correct password must be provided to delete account', function () {
     actingAs($user = User::factory()->create());
 
     visit(route('profile.edit'))
-        ->press('@delete-user')
+        ->press('@delete-user-button')
         ->assertSee('Are you sure you want to delete your account?')
         ->fill('password', 'wrong-password')
-        ->press('@confirm-delete-user')
+        ->press('@confirm-delete-user-button')
         ->assertUrlIs(route('profile.edit'))
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();

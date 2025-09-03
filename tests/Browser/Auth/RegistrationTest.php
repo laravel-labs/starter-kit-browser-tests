@@ -19,7 +19,7 @@ test('new user can be registered', function () {
         ->fill('email', 'taylor@laravel.com')
         ->fill('password', 'password')
         ->fill('password_confirmation', 'password')
-        ->press('Create account')
+        ->press('@register-user-button')
         ->assertPathEndsWith('/dashboard')
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
@@ -38,7 +38,7 @@ test('new user cannot be registered when email has already been taken', function
         ->fill('email', 'taylor@laravel.com')
         ->fill('password', 'password')
         ->fill('password_confirmation', 'password')
-        ->press('Create account')
+        ->press('@register-user-button')
         ->assertSee('The email has already been taken.')
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
@@ -52,7 +52,7 @@ test('new user cannot be registered when password does not match', function () {
         ->fill('email', 'taylor@laravel.com')
         ->fill('password', 'password')
         ->fill('password_confirmation', 'secret')
-        ->press('Create account')
+        ->press('@register-user-button')
         ->assertSee('The password field confirmation does not match.')
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();

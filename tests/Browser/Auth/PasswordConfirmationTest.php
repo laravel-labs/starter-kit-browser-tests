@@ -19,7 +19,7 @@ test('password can be confirmed', function () {
 
     visit(route('password.confirm'))
         ->fill('password', 'password')
-        ->press('Confirm Password')
+        ->press('@confirm-password-button')
         ->assertUrlIs(route('dashboard'))
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
@@ -30,7 +30,7 @@ test('password is not confirmed with invalid password', function () {
 
     visit(route('password.confirm'))
         ->fill('password', 'wrong-password')
-        ->press('Confirm Password')
+        ->press('@confirm-password-button')
         ->assertUrlIs(route('password.confirm'))
         ->assertSee('The provided password is incorrect.')
         ->assertNoConsoleLogs()

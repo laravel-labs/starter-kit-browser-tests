@@ -28,6 +28,13 @@
         }
     },
     "scripts": {
+        "post-autoload-dump": [
+            "@prepare"
+        ],
+        "build": [
+            "@vue:build"
+        ],
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "vue:build": [
             "cd \"./vendor/laravel/vue-starter-kit\" && composer remove --dev \"laravel/sail\" --no-update",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer install",
