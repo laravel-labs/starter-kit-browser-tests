@@ -18,10 +18,9 @@
         "pestphp/pest-plugin-laravel": "^4.0"
     },
     "require-dev": {
-        "laravel/livewire-starter-kit": "dev-pest-ci",
-        "laravel/vue-starter-kit": "dev-pest-ci",
         "orchestra/testbench-core": "^10.6.4",
-        "orchestra/testbench": "^10.6"
+        "orchestra/testbench": "^10.6",
+        "laravel/livewire-starter-kit": "dev-pest-ci"
     },
     "config": {
         "allow-plugins": {
@@ -32,16 +31,10 @@
         "post-autoload-dump": [
             "@prepare"
         ],
-        "build": [
-            "@livewire:build",
-            "@vue:build"
-        ],
-        "test": [
-            "@livewire:test",
-            "@vue:test"
-        ],
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "livewire:build": [
+            "@composer remove --dev \"laravel/vue-starter-kit\"",
+            "@composer require --dev \"laravel/livewire-starter-kit:dev-pest-ci\"",
             "cd \"./vendor/laravel/livewire-starter-kit\" && composer remove --dev \"laravel/sail\" --no-update",
             "cd \"./vendor/laravel/livewire-starter-kit\" && composer install",
             "cd \"./vendor/laravel/livewire-starter-kit\" && composer run post-root-package-install",
@@ -58,6 +51,8 @@
             "cd \"./vendor/laravel/livewire-starter-kit\" && php artisan serve"
         ],
         "vue:build": [
+            "@composer remove --dev \"laravel/livewire-starter-kit\"",
+            "@composer require --dev \"laravel/vue-starter-kit:dev-pest-ci\"",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer remove --dev \"laravel/sail\" --no-update",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer install",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer run post-root-package-install",
