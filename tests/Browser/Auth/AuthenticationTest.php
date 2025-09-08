@@ -51,7 +51,7 @@ test('users can logout', function () {
 
     visit(route('dashboard'))
         ->click($user->name)
-        ->click('Log out')
+        ->click('@logout-button')
         ->assertUrlIs(route('home'))
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();

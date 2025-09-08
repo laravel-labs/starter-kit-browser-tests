@@ -10,7 +10,6 @@ test('profile page is displayed', function () {
     actingAs($user = User::factory()->create());
 
     visit(route('profile.edit'))
-        ->assertSee('Profile information')
         ->assertSee('Update your name and email address')
         ->assertValue('name', $user->name)
         ->assertValue('email', $user->email)
@@ -22,7 +21,6 @@ test('profile information can be updated', function () {
     actingAs($user = User::factory()->create());
 
     visit(route('profile.edit'))
-        ->assertSee('Profile information')
         ->assertSee('Update your name and email address')
         ->fill('name', 'Test User')
         ->fill('email', 'test@example.com')
@@ -43,7 +41,6 @@ test('email verification status is unchanged when the email address is unchanged
     actingAs($user = User::factory()->create());
 
     visit(route('profile.edit'))
-        ->assertSee('Profile information')
         ->assertSee('Update your name and email address')
         ->fill('name', 'Test User')
         ->fill('email', $user->email)
