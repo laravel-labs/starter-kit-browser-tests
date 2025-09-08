@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Password;
 
 use function Pest\Laravel\post;
 
@@ -34,7 +35,7 @@ test('reset password screen can be rendered', function () {
 
     Notification::fake();
 
-    post(route('password.email'), ['email' => $user->email]);
+    Password::sendResetLink($user->email);
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
         visit(route('password.reset', $notification->token))
