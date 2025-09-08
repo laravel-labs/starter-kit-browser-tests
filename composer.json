@@ -19,8 +19,7 @@
     },
     "require-dev": {
         "orchestra/testbench-core": "^10.6.4",
-        "orchestra/testbench": "^10.6",
-        "laravel/livewire-starter-kit": "^1.0"
+        "orchestra/testbench": "^10.6"
     },
     "config": {
         "allow-plugins": {
