@@ -27,8 +27,10 @@
         }
     },
     "scripts": {
-        "post-autoload-dump": [
-            "@prepare"
+        "post-autoload-dump": "@prepare",
+        "clear": [
+            "@livewire:uninstall",
+            "@vue:uninstall"
         ],
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "livewire:install": "@composer require --dev \"laravel/livewire-starter-kit\"",
