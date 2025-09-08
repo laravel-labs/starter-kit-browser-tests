@@ -35,7 +35,7 @@ test('reset password screen can be rendered', function () {
 
     Notification::fake();
 
-    Password::sendResetLink($user->email);
+    Password::sendResetLink(['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
         visit(route('password.reset', $notification->token))
@@ -51,7 +51,7 @@ test('password can be reset with valid token', function () {
 
     Notification::fake();
 
-    post(route('password.email'), ['email' => $user->email]);
+    Password::sendResetLink(['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
         visit(route('password.reset', ['token' => $notification->token, 'email' => $user->email]))
