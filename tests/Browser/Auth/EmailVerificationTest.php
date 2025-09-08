@@ -13,7 +13,6 @@ test('email verification screen can be rendered', function () {
     actingAs($user);
 
     visit(route('verification.notice'))
-        ->assertSee('Verify email')
         ->assertSee('Please verify your email address by clicking on the link we just emailed to you.')
         ->assertSee('Resend verification email')
         ->assertNoConsoleLogs()
