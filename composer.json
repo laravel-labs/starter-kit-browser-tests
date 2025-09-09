@@ -82,7 +82,6 @@
             "@livewire:uninstall",
             "@react:uninstall",
             "@vue:install",
-            "@composer require --dev \"laravel/vue-starter-kit:dev-pest-ci\"",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer remove --dev \"laravel/sail\" --no-update",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer install",
             "cd \"./vendor/laravel/vue-starter-kit\" && composer run post-root-package-install",

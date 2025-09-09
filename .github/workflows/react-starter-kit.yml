@@ -46,7 +46,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Build `react-starter-kit`
-        run: composer run vue:build
+        run: composer run react:build
         env:
           APP_BASE_PATH: ${{ github.workspace }}/vendor/laravel/react-starter-kit
 
