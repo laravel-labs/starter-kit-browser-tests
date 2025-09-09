@@ -19,8 +19,7 @@
     },
     "require-dev": {
         "orchestra/testbench-core": "^10.6.4",
-        "orchestra/testbench": "^10.6",
-        "laravel/react-starter-kit": "^1.0"
+        "orchestra/testbench": "^10.6"
     },
     "config": {
         "allow-plugins": {
@@ -56,7 +55,7 @@
             "@livewire:uninstall"
         ],
         "livewire:serve": "cd \"./vendor/laravel/livewire-starter-kit\" && php artisan serve",
-        "react:install": "@composer require --dev \"laravel/react-starter-kit\"",
+        "react:install": "@composer require --dev \"laravel/react-starter-kit:dev-pest-ci\"",
         "react:uninstall": "@composer remove --dev \"laravel/react-starter-kit\"",
         "react:build": [
             "@livewire:uninstall",
