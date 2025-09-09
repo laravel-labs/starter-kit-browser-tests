@@ -34,7 +34,7 @@
             "@vue:uninstall"
         ],
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
-        "livewire:install": "@composer require --dev \"laravel/livewire-starter-kit:dev-pest-ci\"",
+        "livewire:install": "@composer require --dev \"laravel/livewire-starter-kit\"",
         "livewire:uninstall": "@composer remove --dev \"laravel/livewire-starter-kit\"",
         "livewire:build": [
             "@react:uninstall",
@@ -55,7 +55,7 @@
             "@livewire:uninstall"
         ],
         "livewire:serve": "cd \"./vendor/laravel/livewire-starter-kit\" && php artisan serve",
-        "react:install": "@composer require --dev \"laravel/react-starter-kit:dev-pest-ci\"",
+        "react:install": "@composer require --dev \"laravel/react-starter-kit\"",
         "react:uninstall": "@composer remove --dev \"laravel/react-starter-kit\"",
         "react:build": [
             "@livewire:uninstall",
@@ -76,7 +76,7 @@
             "@react:uninstall"
         ],
         "react:serve": "cd \"./vendor/laravel/react-starter-kit\" && php artisan serve",
-        "vue:install": "@composer require --dev \"laravel/vue-starter-kit:dev-pest-ci\"",
+        "vue:install": "@composer require --dev \"laravel/vue-starter-kit\"",
         "vue:uninstall": "@composer remove --dev \"laravel/vue-starter-kit\"",
         "vue:build": [
             "@livewire:uninstall",
