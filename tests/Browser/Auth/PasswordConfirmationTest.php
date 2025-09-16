@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Composer\InstalledVersions;
 
 use function Pest\Laravel\actingAs;
 
@@ -28,11 +29,14 @@ test('password can be confirmed', function () {
 test('password is not confirmed with invalid password', function () {
     actingAs(User::factory()->create());
 
+    // @TODO: The following check is only required to handle starter-kit without 2 factor authentication.
+    $usesTwoFactorAuthentication = InstalledVersions::isInstalled('laravel/fortify');
+
     visit(route('password.confirm'))
         ->fill('password', 'wrong-password')
         ->press('@confirm-password-button')
         ->assertUrlIs(route('password.confirm'))
-        ->assertSee('The provided password is incorrect.')
+        ->assertSee($usesTwoFactorAuthentication ? 'The provided password was incorrect.' : 'The provided password is incorrect.')
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
 });
