@@ -51,6 +51,6 @@ jobs:
           APP_BASE_PATH: ${{ github.workspace }}/vendor/laravel/vue-starter-kit
 
       - name: Execute tests
-        run: php vendor/bin/pest
+        run: php vendor/bin/pest --parallel
         env:
           APP_BASE_PATH: ${{ github.workspace }}/vendor/laravel/vue-starter-kit
