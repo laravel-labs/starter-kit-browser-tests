@@ -50,7 +50,7 @@ test('users can logout', function () {
     actingAs($user);
 
     visit(route('dashboard'))
-        ->click("//button[.//*[normalize-space(text())='$user->name']]")
+        ->click("//button[.//*[normalize-space(text())='{$user->name}']]")
         ->click('@logout-button')
         ->assertUrlIs(route('home'))
         ->assertNoConsoleLogs()
