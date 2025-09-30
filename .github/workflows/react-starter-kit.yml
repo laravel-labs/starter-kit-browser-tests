@@ -70,4 +70,4 @@ jobs:
         run: composer run react:build
 
       - name: Execute tests
-        run: php vendor/bin/pest
+        run: php vendor/bin/pest --parallel
