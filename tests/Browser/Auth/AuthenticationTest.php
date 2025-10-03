@@ -16,7 +16,7 @@ test('login screen can be rendered', function () {
 });
 
 test('users can authenticate using the login screen', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->withoutTwoFactor()->create();
 
     visit(route('login'))
         ->fill('email', $user->email)
