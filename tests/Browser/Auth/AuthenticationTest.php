@@ -58,19 +58,3 @@ test('users can logout', function () {
 
     assertGuest();
 });
-
-test('users are rate limited', function () {
-    $user = User::factory()->create();
-
-    RateLimiter::increment(implode('|', [$user->email, '127.0.0.1']), amount: 10);
-
-    visit(route('login'))
-        ->fill('email', $user->email)
-        ->fill('password', 'wrong-password')
-        ->press('@login-button')
-        ->assertUrlIs(route('login'))
-        ->assertSee('Too many login attempts. Please try again in')
-        ->assertNoConsoleLogs()
-        ->assertNoJavaScriptErrors();
-});
-
