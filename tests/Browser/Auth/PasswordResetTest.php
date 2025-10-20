@@ -23,7 +23,7 @@ test('test reset password link can be requested', function () {
     visit(route('password.request'))
         ->fill('email', $user->email)
         ->press('@email-password-reset-link-button')
-        ->assertSee('A reset link will be sent if the account exists.')
+        ->assertSee('We have emailed your password reset link.')
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
 
