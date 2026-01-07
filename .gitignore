@@ -13,3 +13,6 @@
 /.phpunit.cache/*
 /.phpunit.result.cache
 /phpunit.xml
+
+# IDEs
+/.idea
