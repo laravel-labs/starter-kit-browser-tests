@@ -6,8 +6,13 @@ use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertAuthenticated;
 use function Pest\Laravel\assertGuest;
 
-test('profile page is displayed', function () {
-    actingAs($user = User::factory()->create());
+dataset('users', [
+    'verified user' => fn () => User::factory()->create(),
+    'unverified user' => fn () => User::factory()->unverified()->create(),
+]);
+
+test('profile page is displayed', function (User $user) {
+    actingAs($user);
 
     visit(route('profile.edit'))
         ->assertSee('Update your name and email address')
@@ -15,7 +20,7 @@ test('profile page is displayed', function () {
         ->assertValue('email', $user->email)
         ->assertNoConsoleLogs()
         ->assertNoJavaScriptErrors();
-});
+})->with('users');
 
 test('profile information can be updated', function () {
     actingAs($user = User::factory()->create());
@@ -35,7 +40,7 @@ test('profile information can be updated', function () {
     expect($user->name)->toBe('Test User');
     expect($user->email)->toBe('test@example.com');
     expect($user->email_verified_at)->toBeNull();
-});
+})->with('users');;
 
 test('email verification status is unchanged when the email address is unchanged', function () {
     actingAs($user = User::factory()->create());
